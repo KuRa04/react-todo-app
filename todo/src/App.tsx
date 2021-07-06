@@ -82,7 +82,11 @@ const App: React.VFC = () => {
   })
 
   return (
-    <div className="App">
+    <div className='App'>
+    <header className='header'>
+      <h1 className='app_title'>Task List</h1>
+      <h2 className='user_name'>yamada</h2>
+    </header>
       <select defaultValue='all' onChange={(e) => setFilter(e.target.value as Filter)}>
         <option value='all'>すべてのタスク</option>
         <option value='checked'>完了したタスク</option>
