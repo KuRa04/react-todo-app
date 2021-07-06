@@ -78,7 +78,7 @@ const App: React.VFC = () => {
       <header className='header'>
         <h1 className='app_title'>Task List</h1>
         <div className='profile'>
-          <img src='person1.svg' width='36' height='36'/>
+          <img src='person1.svg' width='36' height='36' alt='person'/>
           <h2 className='user_name'>yamada</h2>
         </div>
       </header>
@@ -115,7 +115,7 @@ const App: React.VFC = () => {
           </form>
         ) : (
           <div className='add_task_wrapper'>
-            <img src='plus.svg' width='18' height='18'/>
+            <img src='plus.svg' width='18' height='18' alt='plus'/>
             <a className='add_task' onClick={editTask}>タスクを追加する</a>
           </div>
         )}
