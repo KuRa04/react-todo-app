@@ -42,16 +42,6 @@ const App: React.VFC = () => {
     setTodos(newTodos)
   }
 
-  const handleOnCheck = (id: number, checked: boolean) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.checked = !checked;
-      }
-      return todo
-    })
-    setTodos(newTodos)
-  }
-
 
   const handleOnRemove = (id: number, removed: boolean) => {
     const newTodos = todos.map((todo) => {
@@ -63,10 +53,6 @@ const App: React.VFC = () => {
     setTodos(newTodos)
   }
 
-  const handleOnEmpty = () => {
-    const newTodos = todos.filter((todo) => !todo.removed)
-    setTodos(newTodos)
-  }
 
   const filteredTodos = todos.filter((todo) => {
     switch (filter) {
@@ -101,6 +87,14 @@ const App: React.VFC = () => {
           <h1 className='today'>今日</h1>
           <p className='date'>{new Date().getMonth()+1}月{new Date().getDate()}日</p>
         </div>
+        {false &&
+          <select defaultValue='all' onChange={(e) => setFilter(e.target.value as Filter)}>
+            <option value='all'>すべてのタスク</option>
+            <option value='checked'>完了したタスク</option>
+            <option value='unchecked'>未完了のタスク</option>
+            <option value='removed'>削除済みのタスク</option>
+          </select>
+        }
         <ul className='items'>
           {filteredTodos.map(todo => {
             return (
