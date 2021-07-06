@@ -1,3 +1,19 @@
+input {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 li {
   margin: 0;
   padding: 0;
@@ -46,9 +62,31 @@ li {
 
 .today {
   padding-right: 8px;
-  color: #222222;
+  color: #222;
 }
 
 .date {
   color: #808080;
+}
+
+.task_item_list {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.task_item {
+  width: 80%;
+}
+
+.delete_button {
+  color: #222;
+}
+
+.input_wrapper {
+  margin-top: 28px;
+  padding: 32px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-indent: 1rem;
 }

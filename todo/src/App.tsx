@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './App.scss';
 
 interface Todo {
   value: string
@@ -51,6 +51,7 @@ const App: React.VFC = () => {
     setTodos(newTodos)
   }
 
+
   const handleOnRemove = (id: number, removed: boolean) => {
     const newTodos = todos.map((todo) => {
       if(todo.id === id) {
@@ -98,10 +99,9 @@ const App: React.VFC = () => {
         <ul className='items'>
           {filteredTodos.map(todo => {
             return (
-              <li className='task_item' key={todo.id}>
-                <input type='radio' disabled={todo.removed} checked={todo.checked} onChange={() => handleOnCheck(todo.id, todo.checked)}/>
-                <input type='text' disabled={todo.checked || todo.removed} value={todo.value} onChange={(e) => handleOnEdit(todo.id, e.target.value)} />
-                <button onClick={() => handleOnRemove(todo.id, todo.removed)}>{todo.removed ? '復元' : '削除'}</button>
+              <li className='task_item_list' key={todo.id}>
+                <input className='task_item' type='text' disabled={todo.checked || todo.removed} value={todo.value} onChange={(e) => handleOnEdit(todo.id, e.target.value)} />
+                <a className='delete_button' onClick={() => handleOnRemove(todo.id, todo.removed)}>{todo.removed ? 'restore' : 'delete'}</a>
               </li>
             )
           })}
@@ -110,8 +110,8 @@ const App: React.VFC = () => {
           <button onClick={() => handleOnEmpty()}>ゴミ箱を空にする</button>
         ) : (
           <form onSubmit={(e) => handleOnSubmit(e)}>
-            <input type='text' value={text} disabled={filter === 'checked'} onChange={(e) => setText(e.target.value)} />
-            <input type='submit' value={'追加'} disabled={filter === 'checked'} onSubmit={(e) => handleOnSubmit(e)} />
+            <input className='input_wrapper' type='text' value={text} disabled={filter === 'checked'} onChange={(e) => setText(e.target.value)} placeholder='タスク名' />
+            <button className='submit_button' onSubmit={() => handleOnSubmit} />
           </form>
         )}
         <select defaultValue='all' onChange={(e) => setFilter(e.target.value as Filter)}>
