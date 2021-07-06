@@ -14,6 +14,7 @@ const App: React.VFC = () => {
   const [text, setText] = useState('')
   const [todos, setTodos] = useState<Todo[]>([])
   const [filter, setFilter] = useState<Filter>('all')
+  const [isEditing, setEditing] = useState(false)
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement | HTMLInputElement>) => {
     e.preventDefault()
@@ -82,12 +83,16 @@ const App: React.VFC = () => {
     }
   })
 
+  const editTask = () => {
+    setEditing(!isEditing)
+  }
+
   return (
     <div className='App'>
       <header className='header'>
         <h1 className='app_title'>Task List</h1>
         <div className='profile'>
-          <img src='person.png' width='36' height='36'/>
+          <img src='person1.svg' width='36' height='36'/>
           <h2 className='user_name'>yamada</h2>
         </div>
       </header>
@@ -106,20 +111,19 @@ const App: React.VFC = () => {
             )
           })}
         </ul>
-        {filter === 'removed' ? (
-          <button onClick={() => handleOnEmpty()}>ゴミ箱を空にする</button>
-        ) : (
+        {isEditing ? (
           <form onSubmit={(e) => handleOnSubmit(e)}>
             <input className='input_wrapper' type='text' value={text} disabled={filter === 'checked'} onChange={(e) => setText(e.target.value)} placeholder='タスク名' />
-            <button className='submit_button' onSubmit={() => handleOnSubmit} />
+            <div className='buttons'>
+              <button className='submit_button' onSubmit={() => handleOnSubmit}>タスクを追加</button>
+              <button className='cancel_button' onClick={editTask}>キャンセル</button>
+            </div>
           </form>
+        ) : (
+          <div className='add_task_wrapper'>
+            <a className='add_task' onClick={editTask}>タスクを追加する</a>
+          </div>
         )}
-        <select defaultValue='all' onChange={(e) => setFilter(e.target.value as Filter)}>
-          <option value='all'>すべてのタスク</option>
-          <option value='checked'>完了したタスク</option>
-          <option value='unchecked'>未完了のタスク</option>
-          <option value='removed'>削除済みのタスク</option>
-        </select>
         {console.log(todos)}
       </main>
     </div>
