@@ -121,6 +121,7 @@ const App: React.VFC = () => {
           </form>
         ) : (
           <div className='add_task_wrapper'>
+            <img src='plus.svg' width='18' height='18'/>
             <a className='add_task' onClick={editTask}>タスクを追加する</a>
           </div>
         )}

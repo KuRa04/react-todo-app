@@ -127,10 +127,14 @@ button {
 
 .add_task_wrapper {
   display: flex;
+  align-items: center;
   justify-content: flex-start;
-  width: 100%;
+  margin-top: 8px;
+  cursor: pointer;
 }
 
 .add_task {
+  margin-left: 4px;
   color: #595959;
+  font-size: 12px;
 }
