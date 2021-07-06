@@ -83,36 +83,45 @@ const App: React.VFC = () => {
 
   return (
     <div className='App'>
-    <header className='header'>
-      <h1 className='app_title'>Task List</h1>
-      <h2 className='user_name'>yamada</h2>
-    </header>
-      <select defaultValue='all' onChange={(e) => setFilter(e.target.value as Filter)}>
-        <option value='all'>すべてのタスク</option>
-        <option value='checked'>完了したタスク</option>
-        <option value='unchecked'>未完了のタスク</option>
-        <option value='removed'>削除済みのタスク</option>
-      </select>
-      {filter === 'removed' ? (
-        <button onClick={() => handleOnEmpty()}>ゴミ箱を空にする</button>
-      ) : (
-        <form onSubmit={(e) => handleOnSubmit(e)}>
-          <input type='text' value={text} disabled={filter === 'checked'} onChange={(e) => setText(e.target.value)} />
-          <input type='submit' value={'追加'} disabled={filter === 'checked'} onSubmit={(e) => handleOnSubmit(e)} />
-        </form>
-      )}
-      <ul>
-        {filteredTodos.map(todo => {
-          return (
-            <li key={todo.id}>
-              <input type='checkbox' disabled={todo.removed} checked={todo.checked} onChange={() => handleOnCheck(todo.id, todo.checked)}/>
-              <input type='text' disabled={todo.checked || todo.removed} value={todo.value} onChange={(e) => handleOnEdit(todo.id, e.target.value)} />
-              <button onClick={() => handleOnRemove(todo.id, todo.removed)}>{todo.removed ? '復元' : '削除'}</button>
-            </li>
-          )
-        })}
-      </ul>
-      {console.log(todos)}
+      <header className='header'>
+        <h1 className='app_title'>Task List</h1>
+        <div className='profile'>
+          <img src='person.png' width='36' height='36'/>
+          <h2 className='user_name'>yamada</h2>
+        </div>
+      </header>
+      <main className='main'>
+        <div className='schedule'>
+          <h1 className='today'>今日</h1>
+          <p className='date'>{new Date().getMonth()+1}月{new Date().getDate()}日</p>
+        </div>
+        <ul className='items'>
+          {filteredTodos.map(todo => {
+            return (
+              <li className='task_item' key={todo.id}>
+                <input type='radio' disabled={todo.removed} checked={todo.checked} onChange={() => handleOnCheck(todo.id, todo.checked)}/>
+                <input type='text' disabled={todo.checked || todo.removed} value={todo.value} onChange={(e) => handleOnEdit(todo.id, e.target.value)} />
+                <button onClick={() => handleOnRemove(todo.id, todo.removed)}>{todo.removed ? '復元' : '削除'}</button>
+              </li>
+            )
+          })}
+        </ul>
+        {filter === 'removed' ? (
+          <button onClick={() => handleOnEmpty()}>ゴミ箱を空にする</button>
+        ) : (
+          <form onSubmit={(e) => handleOnSubmit(e)}>
+            <input type='text' value={text} disabled={filter === 'checked'} onChange={(e) => setText(e.target.value)} />
+            <input type='submit' value={'追加'} disabled={filter === 'checked'} onSubmit={(e) => handleOnSubmit(e)} />
+          </form>
+        )}
+        <select defaultValue='all' onChange={(e) => setFilter(e.target.value as Filter)}>
+          <option value='all'>すべてのタスク</option>
+          <option value='checked'>完了したタスク</option>
+          <option value='unchecked'>未完了のタスク</option>
+          <option value='removed'>削除済みのタスク</option>
+        </select>
+        {console.log(todos)}
+      </main>
     </div>
   );
 }
