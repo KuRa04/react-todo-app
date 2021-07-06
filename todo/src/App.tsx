@@ -100,7 +100,7 @@ const App: React.VFC = () => {
             return (
               <li className='task_item_list' key={todo.id}>
                 <input className='task_item' type='text' disabled={todo.checked || todo.removed} value={todo.value} onChange={(e) => handleOnEdit(todo.id, e.target.value)} />
-                <a href='#' className='delete_button' onClick={() => handleOnRemove(todo.id, todo.removed)}>{todo.removed ? 'restore' : 'delete'}</a>
+                <p className='delete_button' onClick={() => handleOnRemove(todo.id, todo.removed)}>{todo.removed ? 'restore' : 'delete'}</p>
               </li>
             )
           })}
@@ -116,7 +116,7 @@ const App: React.VFC = () => {
         ) : (
           <div className='add_task_wrapper'>
             <img src='plus.svg' width='18' height='18' alt='plus'/>
-            <a href='#' className='add_task' onClick={editTask}>タスクを追加する</a>
+            <p className='add_task' onClick={editTask}>タスクを追加する</p>
           </div>
         )}
         {console.log(todos)}
